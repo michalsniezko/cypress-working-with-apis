@@ -1,0 +1,39 @@
+{
+  "articles": [
+    {
+      "slug": "asdas-245228",
+      "title": "Title 1",
+      "description": "asd",
+      "body": "asd",
+      "tagList": [],
+      "createdAt": "2023-10-24T06:43:19.894Z",
+      "updatedAt": "2023-10-24T06:43:19.894Z",
+      "favorited": false,
+      "favoritesCount": 1,
+      "author": {
+        "username": "CyTestUser",
+        "bio": null,
+        "image": "https://api.realworld.io/images/smiley-cyrus.jpeg",
+        "following": false
+      }
+    },
+    {
+      "slug": "This-is-the-very-new-title-2-245228",
+      "title": "Title 2",
+      "description": "some text",
+      "body": "this is body",
+      "tagList": [],
+      "createdAt": "2023-10-22T13:59:41.480Z",
+      "updatedAt": "2023-10-22T13:59:41.480Z",
+      "favorited": false,
+      "favoritesCount": 5,
+      "author": {
+        "username": "CyTestUser",
+        "bio": null,
+        "image": "https://api.realworld.io/images/smiley-cyrus.jpeg",
+        "following": false
+      }
+    }
+  ],
+  "articlesCount": 2
+}
