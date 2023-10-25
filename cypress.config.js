@@ -1,6 +1,13 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
+
+  env: {
+    username: 'cytest@test.com',
+    password: 'Welcome123',
+    apiUrl: 'https://api.realworld.io',
+  },
+
   e2e: {
     baseUrl: 'http://localhost:4200',
     excludeSpecPattern: ['**/1-getting-started', '**/2-advanced-examples'],
@@ -8,7 +15,16 @@ module.exports = defineConfig({
     watchForFileChanges: false,
 
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      const username = process.env.DB_USERNAME
+      const password = process.env.PASSWORD
+
+      if (!password) {
+        throw new Error('Missing PASSWORD environment variable')
+      }
+
+      config.env = { username, password }
+
+      return config
     },
   },
 });
