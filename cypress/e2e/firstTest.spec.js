@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { getUniqueId } from "../support/uniqueIdGenerator"
+
 describe('Test with backend', () => {
 	beforeEach('login to the app', () => {
 		cy.intercept({ method: 'GET', path: 'tags' }, { fixture: 'tags.json' })
@@ -14,7 +16,7 @@ describe('Test with backend', () => {
 		cy.intercept('POST', 'https://api.realworld.io/api/articles').as('postArticles')
 
 		cy.contains('New Article').click()
-		cy.get('[formcontrolname="title"]').type('This is the title')
+		cy.get('[formcontrolname="title"]').type('This is the title' + getUniqueId())
 		cy.get('[formcontrolname="description"]').type('This is the description')
 		cy.get('[formcontrolname="body"]').type('This is the body')
 		cy.contains('Publish Article').click()
@@ -54,7 +56,7 @@ describe('Test with backend', () => {
 	})
 
 
-	it.only('intercepting and modifying the request and response', () => {
+	it('intercepting and modifying the request and response', () => {
 		// cy.intercept('POST', '**/articles', (req) => {
 		// 	req.body.article.description = 'This is intercepted description'
 		// }).as('postArticles')
@@ -67,7 +69,7 @@ describe('Test with backend', () => {
 		}).as('postArticles')
 
 		cy.contains('New Article').click()
-		cy.get('[formcontrolname="title"]').type('This is the title')
+		cy.get('[formcontrolname="title"]').type('This is the title' + getUniqueId())
 		cy.get('[formcontrolname="description"]').type('This is the description')
 		cy.get('[formcontrolname="body"]').type('This is the body')
 		cy.contains('Publish Article').click()
@@ -80,4 +82,41 @@ describe('Test with backend', () => {
 		})
 	})
 
+	it('delete a new article in a global feed', () => {
+		const bodyRequest = {
+			"article": {
+				"title": "Request from API" + getUniqueId(),
+				"description": "API testing is easy",
+				"body": "Angular is cool",
+				"tagList": []
+			}
+		}
+
+		cy.get('@token')
+			.then(token => {
+
+				cy.request({
+					url: 'https://api.realworld.io/api/articles/',
+					headers: { 'Authorization': `Token ${token}` },
+					method: 'POST',
+					body: bodyRequest
+				}).then(response => {
+					expect(response.status).to.equal(201)
+				})
+
+				cy.intercept('GET', 'https://api.realworld.io/api/articles*').as('getArticleList')
+				cy.contains('Global Feed').click();
+				cy.wait('@getArticleList')
+				cy.get('.article-preview').first().click()
+				cy.get('.article-actions').contains('Delete Article').click()
+
+				cy.request({
+					url: 'https://api.realworld.io/api/articles?limit=10&offset=0',
+					headers: { 'Authorization': `Token ${token}` },
+					method: 'GET',
+				}).its('body').then(responseBody => {
+					expect(responseBody.articles[0].title).not.to.equal(bodyRequest.article.title)
+				})
+			})
+	})
 })

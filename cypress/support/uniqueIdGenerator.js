@@ -1,0 +1,1 @@
+export const getUniqueId = () => Cypress._.uniqueId(Date.now().toString())
