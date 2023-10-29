@@ -12,8 +12,8 @@
     "open-cypress": "npx cypress open --e2e --browser electron",
     "cypress:run": "npx cypress run",
     "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run",
-    "cypress:open_dev": "npx cypress open --env username=cytest3@test.com,password=Welcome000",
-    "cypress:open_qa": "npx cypress open --env username=cytest_qa@test.com,password=Welcome000qa",
+    "cypress:open_dev": "npx cypress open --env username=thisisusernamefromopen_dev,password=thisispasswordfromopen_dev",
+    "cypress:open_qa": "npx cypress open --env username=thisisusernamefromopen_qa,password=thisispasswordfromopen_qa",
     "cypress:open_process": "npx cypress open --env username=$DB_USERNAME,password=$PASSWORD"
   },
   "engines": {
