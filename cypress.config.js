@@ -2,6 +2,11 @@ const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
 
+  reporter: 'cypress-multi-reporters',
+  reporterOptions: {
+    configFile: 'reporter-config.json',
+  },
+
   env: {
     username: 'this is username from cypress.config.js env object',
     password: 'this is password from cypress.config.js env object',
@@ -22,13 +27,10 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // const username = process.env.DB_USERNAME
       // const password = process.env.PASSWORD
-
       // if (!password) {
       //   throw new Error('Missing PASSWORD environment variable')
       // }
-
       // config.env = { username, password }
-
       // return config
     },
   },
