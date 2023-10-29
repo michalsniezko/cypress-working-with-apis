@@ -49,3 +49,5 @@ cypress.env.json
 /mochawesome-report
 /cypress/screenshots
 /cypress/results
+
+mochawesome.json
