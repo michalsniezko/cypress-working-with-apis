@@ -8,8 +8,8 @@ module.exports = defineConfig({
   },
 
   env: {
-    username: 'this is username from cypress.config.js env object',
-    password: 'this is password from cypress.config.js env object',
+    username: 'this is username from cypress.config.js env object, create cypress.env.json',
+    password: 'this is password from cypress.config.js env object, create cypress.env.json',
     apiUrl: 'https://api.realworld.io',
   },
 
