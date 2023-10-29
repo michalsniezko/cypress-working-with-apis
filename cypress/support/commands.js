@@ -37,6 +37,13 @@
 //   }
 // }
 
+// noinspection JSCheckFunctionSignatures
+/**
+ * @memberof cy
+ * @method loginToApplication
+ * @param {*} [value]
+ * @returns Chainable
+ */
 Cypress.Commands.add('loginToApplication', () => {
     const userCredentials = {
         "user": {
